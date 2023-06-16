@@ -12,14 +12,18 @@ interface RootNavigatorProps {
 
 export const RootNavigator: React.FC<RootNavigatorProps> = ({ isLoggedIn }) => {
   return (
-    <Stack.Navigator>
+    <Stack.Navigator screenOptions={{ animation: "slide_from_right" }}>
       {isLoggedIn ? (
         <>
           <Stack.Screen name="Dashboard" component={DashboardScreen} />
         </>
       ) : (
         <>
-          <Stack.Screen name="Login" component={LoginScreen} />
+          <Stack.Screen
+            name="Login"
+            component={LoginScreen}
+            options={{ headerShown: false }}
+          />
         </>
       )}
     </Stack.Navigator>
