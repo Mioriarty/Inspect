@@ -21,6 +21,7 @@ import { StatusBar } from "react-native";
 import { UserContext, UserDetails } from "./contexts/UserContext";
 import { NavigationContainer } from "@react-navigation/native";
 import { RootNavigator } from "./navigators/RootNavigator";
+import { SafeAreaProvider } from "react-native-safe-area-context";
 
 const data = new Array(30).fill({
   title: "Item",
@@ -70,9 +71,11 @@ export default () => {
       <IconRegistry icons={EvaIconsPack} />
       <ApplicationProvider {...eva} theme={eva.light}>
         <UserContext.Provider value={{ user, setUser }}>
-          <NavigationContainer>
-            <RootNavigator isLoggedIn={user != null} />
-          </NavigationContainer>
+          <SafeAreaProvider>
+            <NavigationContainer>
+              <RootNavigator isLoggedIn={user != null} />
+            </NavigationContainer>
+          </SafeAreaProvider>
         </UserContext.Provider>
       </ApplicationProvider>
     </>
