@@ -7,7 +7,7 @@ export interface UserDetails {
 
 export interface UserContextType {
   user: UserDetails;
-  setUser: React.Dispatch<React.SetStateAction<UserDetails>>;
+  setUser: (UserDetails) => void;
 }
 
 export const UserContext = createContext<UserContextType>({
