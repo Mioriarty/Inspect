@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 
 import { EvaIconsPack } from "@ui-kitten/eva-icons";
 import { SafeAreaView, StyleSheet } from "react-native";
@@ -18,6 +18,7 @@ import {
 } from "@ui-kitten/components";
 import * as eva from "@eva-design/eva";
 import { StatusBar } from "react-native";
+import { UserContext, UserDetails } from "./contexts/UserContext";
 
 const data = new Array(30).fill({
   title: "Item",
@@ -59,11 +60,17 @@ const styles = StyleSheet.create({
   },
 });
 
-export default () => (
-  <>
-    <IconRegistry icons={EvaIconsPack} />
-    <ApplicationProvider {...eva} theme={eva.light}>
-      <HomeScreen />
-    </ApplicationProvider>
-  </>
-);
+export default () => {
+  const [user, setUser] = useState<UserDetails | null>();
+
+  return (
+    <>
+      <IconRegistry icons={EvaIconsPack} />
+      <ApplicationProvider {...eva} theme={eva.light}>
+        <UserContext.Provider value={user}>
+          <HomeScreen />
+        </UserContext.Provider>
+      </ApplicationProvider>
+    </>
+  );
+};
