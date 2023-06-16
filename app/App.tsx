@@ -19,6 +19,8 @@ import {
 import * as eva from "@eva-design/eva";
 import { StatusBar } from "react-native";
 import { UserContext, UserDetails } from "./contexts/UserContext";
+import { NavigationContainer } from "@react-navigation/native";
+import { RootNavigator } from "./navigators/RootNavigator";
 
 const data = new Array(30).fill({
   title: "Item",
@@ -67,8 +69,10 @@ export default () => {
     <>
       <IconRegistry icons={EvaIconsPack} />
       <ApplicationProvider {...eva} theme={eva.light}>
-        <UserContext.Provider value={user}>
-          <HomeScreen />
+        <UserContext.Provider value={{ user, setUser }}>
+          <NavigationContainer>
+            <RootNavigator isLoggedIn={user != null} />
+          </NavigationContainer>
         </UserContext.Provider>
       </ApplicationProvider>
     </>
