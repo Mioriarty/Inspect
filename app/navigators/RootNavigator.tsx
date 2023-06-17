@@ -38,7 +38,7 @@ export const RootNavigator: React.FC<RootNavigatorProps> = ({ isLoggedIn }) => {
             component={TourScreen}
             options={{
               header: ({ route }) => (
-                <TopNavigation title={route.params["title"]} />
+                <TopNavigation title={route.params["name"]} />
               ),
             }}
           />
