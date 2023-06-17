@@ -1,4 +1,5 @@
 import {
+  Button,
   Card,
   Divider,
   Input,
@@ -7,8 +8,9 @@ import {
   Text,
 } from "@ui-kitten/components";
 import React, { useEffect, useMemo, useState } from "react";
-import { StyleSheet, View } from "react-native";
+import { ScrollView, StyleSheet, View } from "react-native";
 import { GradingOptionsRow } from "../components/grading/GradingOptionRow";
+import { Fragment } from "react";
 import { RouteProp, useRoute } from "@react-navigation/native";
 import { RootStackParamList } from "../navigators/RootNavigator";
 import {
@@ -16,6 +18,7 @@ import {
   GradingOption,
   ROOM_TYPES,
 } from "../assets/dummy-data";
+import { SafeAreaView } from "react-native-safe-area-context";
 
 export const GradingScreen: React.FC = () => {
   const route = useRoute<RouteProp<RootStackParamList, "GradingScreen">>();
@@ -45,21 +48,28 @@ export const GradingScreen: React.FC = () => {
 
   return (
     <Layout level="2" style={styles.container}>
-      <Card disabled style={styles.nameCard}>
-        <Input label="Name des Raums" />
-      </Card>
-      <List
-        data={gradingOptions}
-        ItemSeparatorComponent={() => <Divider />}
-        renderItem={({ item, index }) => (
-          <GradingOptionsRow
-            gradingOption={item.option}
-            value={item.value}
-            setValue={(value) => setGrading(index, value)}
-          />
-        )}
-      />
-      <Text>Footer</Text>
+      <SafeAreaView edges={["left", "right", "bottom"]} style={{ flex: 1 }}>
+        <ScrollView>
+          <Card disabled style={styles.nameCard}>
+            <Input label="Name des Raums" />
+          </Card>
+          {gradingOptions.map((item, index) => (
+            <Fragment key={index}>
+              <GradingOptionsRow
+                gradingOption={item.option}
+                value={item.value}
+                setValue={(value) => setGrading(index, value)}
+              />
+              {index == gradingOptions.length - 1 ? <></> : <Divider />}
+            </Fragment>
+          ))}
+          <Button style={styles.saveButton}>Speichern</Button>
+        </ScrollView>
+        <Divider />
+        <View style={styles.footerContainer}>
+          <Text>Gesamtbewertung: 50%</Text>
+        </View>
+      </SafeAreaView>
     </Layout>
   );
 };
@@ -71,5 +81,13 @@ const styles = StyleSheet.create({
   nameCard: {
     marginVertical: 8,
     marginHorizontal: 16,
+  },
+  saveButton: {
+    margin: 8,
+  },
+  footerContainer: {
+    marginTop: 8,
+    marginBottom: 12,
+    alignItems: "center",
   },
 });
