@@ -8,11 +8,13 @@ import {
 } from "../screens/DashboardScreen";
 import { TopNavigation } from "../components/TopNavigation";
 import { TourScreen } from "../screens/TourScreen";
+import { GradingScreen } from "../screens/GradingScreen";
 
 export type RootStackParamList = {
   LoginScreen: undefined;
   DashboardScreen: undefined;
   TourScreen: { name: string };
+  GradingScreen: { roomType: string };
 };
 
 const Stack = createNativeStackNavigator<RootStackParamList>();
@@ -39,6 +41,15 @@ export const RootNavigator: React.FC<RootNavigatorProps> = ({ isLoggedIn }) => {
             options={{
               header: ({ route }) => (
                 <TopNavigation title={route.params["name"]} />
+              ),
+            }}
+          />
+          <Stack.Screen
+            name="GradingScreen"
+            component={GradingScreen}
+            options={{
+              header: ({ route }) => (
+                <TopNavigation title={route.params["roomType"]} />
               ),
             }}
           />
