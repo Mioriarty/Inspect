@@ -2,7 +2,11 @@ import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import React from "react";
 import { LoginScreen } from "../screens/LoginScreen";
-import { DashboardScreen } from "../screens/DashboardScreen";
+import {
+  DashboardScreen,
+  DashboardTopNavigation,
+} from "../screens/DashboardScreen";
+import { TopNavigation } from "../components/TopNavigation";
 
 const Stack = createNativeStackNavigator();
 
@@ -15,7 +19,13 @@ export const RootNavigator: React.FC<RootNavigatorProps> = ({ isLoggedIn }) => {
     <Stack.Navigator screenOptions={{ animation: "slide_from_right" }}>
       {isLoggedIn ? (
         <>
-          <Stack.Screen name="Dashboard" component={DashboardScreen} />
+          <Stack.Screen
+            name="Dashboard"
+            component={DashboardScreen}
+            options={{
+              header: () => <DashboardTopNavigation />,
+            }}
+          />
         </>
       ) : (
         <>
