@@ -59,19 +59,19 @@ export const GradingMethod3Scale: React.FC<GradingMethodProps> = (props) => {
           icon: "checkmark",
           text: "VOLLLEISTUNG",
           color: theme["color-success-default"],
-          value: 3,
+          value: 1,
         },
         {
           icon: "minus",
           text: "TEILLEISTUNG",
           color: theme["color-warning-default"],
-          value: 2,
+          value: 0.5,
         },
         {
           icon: "close",
           text: "NICHTLEISTUNG",
           color: theme["color-danger-default"],
-          value: 1,
+          value: 0,
         },
       ]}
       {...props}
@@ -88,13 +88,13 @@ export const GradingMethod2Scale: React.FC<GradingMethodProps> = (props) => {
           icon: "checkmark",
           text: "VOLLLEISTUNG",
           color: theme["color-success-default"],
-          value: 2,
+          value: 1,
         },
         {
           icon: "close",
           text: "NICHTLEISTUNG",
           color: theme["color-danger-default"],
-          value: 1,
+          value: 0,
         },
       ]}
       {...props}

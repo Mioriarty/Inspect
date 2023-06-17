@@ -11,10 +11,11 @@ import React, { useEffect, useMemo, useState } from "react";
 import { ScrollView, StyleSheet, View } from "react-native";
 import { GradingOptionsRow } from "../components/grading/GradingOptionRow";
 import { Fragment } from "react";
-import { RouteProp, useRoute } from "@react-navigation/native";
+import { RouteProp, useNavigation, useRoute } from "@react-navigation/native";
 import { RootStackParamList } from "../navigators/RootNavigator";
 import {
   GRADING_OPTIONS,
+  GradingMethod,
   GradingOption,
   ROOM_TYPES,
 } from "../assets/dummy-data";
@@ -22,6 +23,7 @@ import { SafeAreaView } from "react-native-safe-area-context";
 
 export const GradingScreen: React.FC = () => {
   const route = useRoute<RouteProp<RootStackParamList, "GradingScreen">>();
+  const navigation = useNavigation();
 
   const [gradingOptions, setGradingOptions] = useState<
     { option: GradingOption; value: number }[]
@@ -46,6 +48,15 @@ export const GradingScreen: React.FC = () => {
     ]);
   };
 
+  const totalGrade = useMemo<number | undefined>(() => {
+    const votedGradingOptions = gradingOptions.filter(
+      (o) => o.value != undefined
+    );
+    if (votedGradingOptions.length == 0) return undefined;
+    const totalScore = votedGradingOptions.reduce((a, b) => a + b.value, 0);
+    return totalScore / votedGradingOptions.length;
+  }, [gradingOptions]);
+
   return (
     <Layout level="2" style={styles.container}>
       <SafeAreaView edges={["left", "right", "bottom"]} style={{ flex: 1 }}>
@@ -63,11 +74,18 @@ export const GradingScreen: React.FC = () => {
               {index == gradingOptions.length - 1 ? <></> : <Divider />}
             </Fragment>
           ))}
-          <Button style={styles.saveButton}>Speichern</Button>
+          <Button style={styles.saveButton} onPress={() => navigation.goBack()}>
+            Speichern
+          </Button>
         </ScrollView>
         <Divider />
         <View style={styles.footerContainer}>
-          <Text>Gesamtbewertung: 50%</Text>
+          <Text>
+            Gesamtbewertung:{" "}
+            {totalGrade == undefined
+              ? "--"
+              : (totalGrade * 100).toFixed() + " %"}
+          </Text>
         </View>
       </SafeAreaView>
     </Layout>
