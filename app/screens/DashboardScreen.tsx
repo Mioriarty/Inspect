@@ -15,46 +15,15 @@ import { Icon } from "../components/Icon";
 import { TourCard, TourCardProps } from "../components/TourCard";
 import { ScrollView } from "react-native";
 import { TOURS } from "../assets/dummy-data";
-
-const MenuIcon = (props): IconElement => (
-  <Icon {...props} name="more-vertical" />
-);
+import { DrawerActions, useNavigation } from "@react-navigation/native";
 
 export const DashboardTopNavigation = () => {
-  const [menuVisible, setMenuVisible] = useState<boolean>(false);
-
-  const toggleMenu = (): void => {
-    setMenuVisible(!menuVisible);
-  };
-
-  const renderMenuAction = (): React.ReactElement => (
-    <TopNavigationAction icon={MenuIcon} onPress={toggleMenu} />
-  );
-
-  const renderRightActions = (): React.ReactElement => (
-    <>
-      <OverflowMenu
-        anchor={renderMenuAction}
-        visible={menuVisible}
-        onBackdropPress={toggleMenu}
-      >
-        <MenuItem
-          accessoryLeft={(props) => <Icon {...props} name="info" />}
-          title="About"
-        />
-        <MenuItem
-          accessoryLeft={(props) => <Icon {...props} name="log-out" />}
-          title="Logout"
-        />
-      </OverflowMenu>
-    </>
-  );
-
+  const navigation = useNavigation();
   return (
     <TopNavigation
       title="Inspect"
-      hideBackArrow
-      accessoryRight={renderRightActions}
+      backIcon="menu"
+      backAction={() => navigation.dispatch(DrawerActions.openDrawer())}
     />
   );
 };

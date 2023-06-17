@@ -9,10 +9,11 @@ import {
 import { TopNavigation } from "../components/TopNavigation";
 import { TourScreen } from "../screens/TourScreen";
 import { GradingScreen } from "../screens/GradingScreen";
+import { DrawerNavigator } from "./DrawerNavigator";
 
 export type RootStackParamList = {
   LoginScreen: undefined;
-  DashboardScreen: undefined;
+  DrawerNagiator: undefined;
   TourScreen: { name: string };
   GradingScreen: { roomType: string };
 };
@@ -29,10 +30,10 @@ export const RootNavigator: React.FC<RootNavigatorProps> = ({ isLoggedIn }) => {
       {isLoggedIn ? (
         <>
           <Stack.Screen
-            name="DashboardScreen"
-            component={DashboardScreen}
+            name="DrawerNagiator"
+            component={DrawerNavigator}
             options={{
-              header: () => <DashboardTopNavigation />,
+              headerShown: false,
             }}
           />
           <Stack.Screen

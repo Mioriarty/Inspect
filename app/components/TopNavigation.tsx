@@ -14,7 +14,9 @@ import { useSafeAreaInsets } from "react-native-safe-area-context";
 interface TopNavigationProps {
   title: string;
   subtitle?: string;
-  hideBackArrow?: boolean;
+  hideBackIcon?: boolean;
+  backIcon?: string;
+  backAction?: () => void;
   accessoryRight?: () => React.ReactElement<
     any,
     string | React.JSXElementConstructor<any>
@@ -24,8 +26,10 @@ interface TopNavigationProps {
 export const TopNavigation: React.FC<TopNavigationProps> = ({
   title,
   subtitle,
-  hideBackArrow,
+  hideBackIcon,
+  backIcon,
   accessoryRight,
+  backAction,
 }) => {
   const insets = useSafeAreaInsets();
 
@@ -37,7 +41,11 @@ export const TopNavigation: React.FC<TopNavigationProps> = ({
           alignment="center"
           title={title}
           subtitle={subtitle}
-          accessoryLeft={() => (hideBackArrow ? null : <BackIconAction />)}
+          accessoryLeft={() =>
+            hideBackIcon ? null : (
+              <BackIconAction icon={backIcon} backAction={backAction} />
+            )
+          }
           accessoryRight={accessoryRight}
         />
       </Layout>
@@ -47,15 +55,19 @@ export const TopNavigation: React.FC<TopNavigationProps> = ({
 };
 
 TopNavigation.defaultProps = {
-  hideBackArrow: false,
+  hideBackIcon: false,
+  backIcon: "arrow-back",
 };
 
-const BackIconAction: React.FC = () => {
+export const BackIconAction: React.FC<{
+  icon: string;
+  backAction?: () => void;
+}> = ({ icon, backAction }) => {
   const navigation = useNavigation();
   return (
     <TopNavigationAction
-      icon={(props) => <Icon {...props} name="arrow-back" />}
-      onPress={() => navigation.goBack()}
+      icon={(props) => <Icon {...props} name={icon} />}
+      onPress={backAction ? backAction : () => navigation.goBack()}
     />
   );
 };
