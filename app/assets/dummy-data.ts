@@ -7,6 +7,7 @@ export interface GradingOption {
   name: string;
   frequency: string;
   gradingMethod: GradingMethod;
+  allowAlternative: boolean;
 }
 
 export interface RoomType {
@@ -96,51 +97,61 @@ export const GRADING_OPTIONS: GradingOption[] = [
     name: "Fußböden",
     frequency: "1x wöchentlich",
     gradingMethod: GradingMethod.SCALE3,
+    allowAlternative: false,
   },
   {
     name: "Abfallbehälter leeren",
     frequency: "1x wöchentlich",
     gradingMethod: GradingMethod.SCALE2,
+    allowAlternative: false,
   },
   {
     name: "Andtuch-/Seifenspender auffüllen",
     frequency: "1x wöchentlich",
     gradingMethod: GradingMethod.SCALE2,
+    allowAlternative: false,
   },
   {
     name: "Aufstuhlen",
     frequency: "1x wöchentlich",
     gradingMethod: GradingMethod.SCALE2,
+    allowAlternative: true,
   },
   {
     name: "Kreideablage",
     frequency: "2x wöchentlich",
     gradingMethod: GradingMethod.SCALE2,
+    allowAlternative: false,
   },
   {
     name: "unbestellte Tischpberflächen",
     frequency: "2x wöchentlich",
     gradingMethod: GradingMethod.SCALE2,
+    allowAlternative: false,
   },
   {
     name: "Waschbecken",
     frequency: "2x wöchentlich",
     gradingMethod: GradingMethod.SCALE2,
+    allowAlternative: false,
   },
   {
     name: "Griffspuren",
     frequency: "1x wöchentlich",
     gradingMethod: GradingMethod.SCALE2,
+    allowAlternative: false,
   },
   {
     name: "Fensterbänke (abgeräumt)",
     frequency: "2x monatlich",
     gradingMethod: GradingMethod.SCALE2,
+    allowAlternative: false,
   },
   {
     name: "Kabelkanäle",
     frequency: "1x monatlich",
     gradingMethod: GradingMethod.SCALE2,
+    allowAlternative: false,
   },
 ];
 

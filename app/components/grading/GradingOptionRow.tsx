@@ -2,6 +2,7 @@ import {
   Button,
   ButtonGroup,
   IndexPath,
+  Input,
   Layout,
   ListItem,
   ListItemProps,
@@ -32,6 +33,13 @@ export const GradingOptionsRow: React.FC<GradingOptionRowProps> = ({
       <Text appearance="hint" category="s2">
         {gradingOption.frequency}
       </Text>
+      {gradingOption.allowAlternative ? (
+        <View style={styles.allowAlternativeContainer}>
+          <Input placeholder="Leistung stattdessen" size="small" />
+        </View>
+      ) : (
+        <></>
+      )}
       {gradingOption.gradingMethod == GradingMethod.SCALE2 ? (
         <GradingMethod2Scale value={value} setValue={setValue} />
       ) : (
@@ -45,5 +53,8 @@ const styles = StyleSheet.create({
   container: {
     paddingVertical: 8,
     paddingHorizontal: 16,
+  },
+  allowAlternativeContainer: {
+    paddingTop: 8,
   },
 });
