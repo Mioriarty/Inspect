@@ -84,6 +84,7 @@ const styles = StyleSheet.create({
   },
   saveButton: {
     margin: 8,
+    marginTop: 16,
   },
   footerContainer: {
     marginTop: 8,
