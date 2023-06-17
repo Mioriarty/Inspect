@@ -1,6 +1,12 @@
+export enum GradingMethod {
+  SCALE2,
+  SCALE3,
+}
+
 export interface GradingOption {
   name: string;
   frequency: string;
+  gradingMethod: GradingMethod;
 }
 
 export interface RoomType {
@@ -86,16 +92,56 @@ export const ROOM_TYPES: RoomType[] = [
 ];
 
 export const GRADING_OPTIONS: GradingOption[] = [
-  { name: "Fußböden", frequency: "1x wöchentlich" },
-  { name: "Abfallbehälter leeren", frequency: "1x wöchentlich" },
-  { name: "Andtuch-/Seifenspender auffüllen", frequency: "1x wöchentlich" },
-  { name: "Aufstuhlen", frequency: "1x wöchentlich" },
-  { name: "Kreideablage", frequency: "2x wöchentlich" },
-  { name: "unbestellte Tischpberflächen", frequency: "2x wöchentlich" },
-  { name: "Waschbecken", frequency: "2x wöchentlich" },
-  { name: "Griffspuren", frequency: "1x wöchentlich" },
-  { name: "Fensterbänke (abgeräumt)", frequency: "2x monatlich" },
-  { name: "Kabelkanäle", frequency: "1x monatlich" },
+  {
+    name: "Fußböden",
+    frequency: "1x wöchentlich",
+    gradingMethod: GradingMethod.SCALE3,
+  },
+  {
+    name: "Abfallbehälter leeren",
+    frequency: "1x wöchentlich",
+    gradingMethod: GradingMethod.SCALE2,
+  },
+  {
+    name: "Andtuch-/Seifenspender auffüllen",
+    frequency: "1x wöchentlich",
+    gradingMethod: GradingMethod.SCALE2,
+  },
+  {
+    name: "Aufstuhlen",
+    frequency: "1x wöchentlich",
+    gradingMethod: GradingMethod.SCALE2,
+  },
+  {
+    name: "Kreideablage",
+    frequency: "2x wöchentlich",
+    gradingMethod: GradingMethod.SCALE2,
+  },
+  {
+    name: "unbestellte Tischpberflächen",
+    frequency: "2x wöchentlich",
+    gradingMethod: GradingMethod.SCALE2,
+  },
+  {
+    name: "Waschbecken",
+    frequency: "2x wöchentlich",
+    gradingMethod: GradingMethod.SCALE2,
+  },
+  {
+    name: "Griffspuren",
+    frequency: "1x wöchentlich",
+    gradingMethod: GradingMethod.SCALE2,
+  },
+  {
+    name: "Fensterbänke (abgeräumt)",
+    frequency: "2x monatlich",
+    gradingMethod: GradingMethod.SCALE2,
+  },
+  {
+    name: "Kabelkanäle",
+    frequency: "1x monatlich",
+    gradingMethod: GradingMethod.SCALE2,
+  },
 ];
 
 export const TOURS: Tour[] = [

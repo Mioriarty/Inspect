@@ -12,8 +12,8 @@ import {
 import { useEffect, useState } from "react";
 import { StyleSheet, View } from "react-native";
 import { Icon } from "../Icon";
-import { GradingMethod3Scale } from "./GradingMethodScale";
-import { GradingOption } from "../../assets/dummy-data";
+import { GradingMethod2Scale, GradingMethod3Scale } from "./GradingMethodScale";
+import { GradingMethod, GradingOption } from "../../assets/dummy-data";
 
 export interface GradingOptionRowProps {
   gradingOption: GradingOption;
@@ -32,7 +32,11 @@ export const GradingOptionsRow: React.FC<GradingOptionRowProps> = ({
       <Text appearance="hint" category="s2">
         {gradingOption.frequency}
       </Text>
-      <GradingMethod3Scale value={value} setValue={setValue} />
+      {gradingOption.gradingMethod == GradingMethod.SCALE2 ? (
+        <GradingMethod2Scale value={value} setValue={setValue} />
+      ) : (
+        <GradingMethod3Scale value={value} setValue={setValue} />
+      )}
     </Layout>
   );
 };

@@ -79,6 +79,29 @@ export const GradingMethod3Scale: React.FC<GradingMethodProps> = (props) => {
   );
 };
 
+export const GradingMethod2Scale: React.FC<GradingMethodProps> = (props) => {
+  const theme = useTheme();
+  return (
+    <GradingMethodScale
+      options={[
+        {
+          icon: "checkmark",
+          text: "VOLLLEISTUNG",
+          color: theme["color-success-default"],
+          value: 2,
+        },
+        {
+          icon: "close",
+          text: "NICHTLEISTUNG",
+          color: theme["color-danger-default"],
+          value: 1,
+        },
+      ]}
+      {...props}
+    />
+  );
+};
+
 const styles = StyleSheet.create({
   container: {
     flexDirection: "row",
