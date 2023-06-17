@@ -2,6 +2,9 @@ import { Card, Divider, Text } from "@ui-kitten/components";
 import React from "react";
 import { StyleSheet, View } from "react-native";
 import { Icon } from "./Icon";
+import { useNavigation } from "@react-navigation/native";
+import { NativeStackNavigationProp } from "@react-navigation/native-stack";
+import { RootStackParamList } from "../navigators/RootNavigator";
 
 export interface TourCardProps {
   title: string;
@@ -16,6 +19,9 @@ export const TourCard: React.FC<TourCardProps> = ({
   progress,
   rating,
 }) => {
+  const navigation =
+    useNavigation<NativeStackNavigationProp<RootStackParamList>>();
+
   const renderHeader = (): React.ReactElement => (
     <View style={styles.headerContainer}>
       <Text category="h6">{title}</Text>
@@ -46,7 +52,11 @@ export const TourCard: React.FC<TourCardProps> = ({
 
   return (
     <View style={styles.container}>
-      <Card header={renderHeader} footer={renderFooter}>
+      <Card
+        header={renderHeader}
+        footer={renderFooter}
+        onPress={() => navigation.navigate("TourScreen", { title })}
+      >
         {rooms.map((room, i) => (
           <View style={styles.infoRowContainer} key={i}>
             <Text>{room.name}</Text>

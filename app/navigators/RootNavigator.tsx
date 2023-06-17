@@ -7,8 +7,15 @@ import {
   DashboardTopNavigation,
 } from "../screens/DashboardScreen";
 import { TopNavigation } from "../components/TopNavigation";
+import { TourScreen } from "../screens/TourScreen";
 
-const Stack = createNativeStackNavigator();
+export type RootStackParamList = {
+  LoginScreen: undefined;
+  DashboardScreen: undefined;
+  TourScreen: { title: string };
+};
+
+const Stack = createNativeStackNavigator<RootStackParamList>();
 
 interface RootNavigatorProps {
   isLoggedIn: boolean;
@@ -20,17 +27,26 @@ export const RootNavigator: React.FC<RootNavigatorProps> = ({ isLoggedIn }) => {
       {isLoggedIn ? (
         <>
           <Stack.Screen
-            name="Dashboard"
+            name="DashboardScreen"
             component={DashboardScreen}
             options={{
               header: () => <DashboardTopNavigation />,
+            }}
+          />
+          <Stack.Screen
+            name="TourScreen"
+            component={TourScreen}
+            options={{
+              header: ({ route }) => (
+                <TopNavigation title={route.params["title"]} />
+              ),
             }}
           />
         </>
       ) : (
         <>
           <Stack.Screen
-            name="Login"
+            name="LoginScreen"
             component={LoginScreen}
             options={{ headerShown: false }}
           />
