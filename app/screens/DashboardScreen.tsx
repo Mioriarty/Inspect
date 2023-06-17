@@ -14,6 +14,7 @@ import { useState } from "react";
 import { Icon } from "../components/Icon";
 import { TourCard, TourCardProps } from "../components/TourCard";
 import { ScrollView } from "react-native";
+import { TOURS } from "../assets/dummy-data";
 
 const MenuIcon = (props): IconElement => (
   <Icon {...props} name="more-vertical" />
@@ -58,34 +59,26 @@ export const DashboardTopNavigation = () => {
   );
 };
 
-const DUMMY_TOURS: TourCardProps[] = [
-  {
-    title: "Rundgang Schiller",
-    rooms: [
-      { name: "Klassenzimmer", count: 10 },
-      { name: "Sporthallen", count: 2 },
-      { name: "Außenflächen", count: 1 },
-    ],
-    progress: 0.35,
-    rating: 0.9,
-  },
-  {
-    title: "Rundgang Gerda Taro Schule",
-    rooms: [
-      { name: "Klassenzimmer", count: 42 },
-      { name: "Sporthallen", count: 1 },
-    ],
-    progress: 1,
-    rating: 0.2,
-  },
+const DUMMY_PR = [
+  { progress: 0.6, rating: 0.95 },
+  { progress: 1, rating: 0.3 },
 ];
 
 export const DashboardScreen: React.FC = () => {
   return (
     <Layout level="2" style={{ flex: 1 }}>
       <ScrollView style={{ flex: 1 }}>
-        {DUMMY_TOURS.map((tour, i) => (
-          <TourCard {...tour} key={i} />
+        {TOURS.map((tour, i) => (
+          <TourCard
+            key={i}
+            name={tour.name}
+            rooms={tour.rooms.map((r) => ({
+              name: r.typeName,
+              count: r.count,
+            }))}
+            progress={DUMMY_PR[i].progress}
+            rating={DUMMY_PR[i].rating}
+          />
         ))}
       </ScrollView>
     </Layout>

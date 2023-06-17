@@ -7,14 +7,14 @@ import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 import { RootStackParamList } from "../navigators/RootNavigator";
 
 export interface TourCardProps {
-  title: string;
+  name: string;
   rooms: { name: string; count: number }[];
   progress: number;
   rating: number;
 }
 
 export const TourCard: React.FC<TourCardProps> = ({
-  title,
+  name,
   rooms,
   progress,
   rating,
@@ -24,7 +24,7 @@ export const TourCard: React.FC<TourCardProps> = ({
 
   const renderHeader = (): React.ReactElement => (
     <View style={styles.headerContainer}>
-      <Text category="h6">{title}</Text>
+      <Text category="h6">{name}</Text>
       {progress == 1 ? (
         <Icon name="checkmark-outline" fill="#00B383" width={22} height={22} />
       ) : (
@@ -55,7 +55,7 @@ export const TourCard: React.FC<TourCardProps> = ({
       <Card
         header={renderHeader}
         footer={renderFooter}
-        onPress={() => navigation.navigate("TourScreen", { title })}
+        onPress={() => navigation.navigate("TourScreen", { name })}
       >
         {rooms.map((room, i) => (
           <View style={styles.infoRowContainer} key={i}>

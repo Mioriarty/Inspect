@@ -12,7 +12,7 @@ import { TourScreen } from "../screens/TourScreen";
 export type RootStackParamList = {
   LoginScreen: undefined;
   DashboardScreen: undefined;
-  TourScreen: { title: string };
+  TourScreen: { name: string };
 };
 
 const Stack = createNativeStackNavigator<RootStackParamList>();
