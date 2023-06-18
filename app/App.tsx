@@ -18,55 +18,15 @@ import {
   Icon,
 } from "@ui-kitten/components";
 import * as eva from "@eva-design/eva";
-import { StatusBar } from "react-native";
 import { UserContext, UserDetails } from "./contexts/UserContext";
-import { NavigationContainer } from "@react-navigation/native";
+import { NavigationContainer, useTheme } from "@react-navigation/native";
 import { RootNavigator } from "./navigators/RootNavigator";
 import { SafeAreaProvider } from "react-native-safe-area-context";
 import {
   ThemeModeContext,
   ThemeModeContextType,
 } from "./contexts/ThemeModeContext";
-
-const data = new Array(30).fill({
-  title: "Item",
-  description: "Description for Item",
-});
-
-const BackIcon: React.FC = () => {
-  return (
-    <Icon name="arrow-back" style={{ height: 24, width: 24 }} fill="#222b45" />
-  );
-};
-const BackAction = () => <TopNavigationAction icon={BackIcon} />;
-
-const HomeScreen = () => {
-  const renderItem = ({ item, index }) => (
-    <ListItem
-      title={`${item.title} ${index + 1}`}
-      description={`${item.description} ${index + 1}`}
-    />
-  );
-
-  return (
-    <>
-      <SafeAreaView style={{ flex: 1, marginTop: StatusBar.currentHeight }}>
-        <TopNavigation title="Bla" accessoryLeft={BackAction} />
-        <List
-          data={data}
-          ItemSeparatorComponent={Divider}
-          renderItem={renderItem}
-        />
-      </SafeAreaView>
-    </>
-  );
-};
-
-const styles = StyleSheet.create({
-  container: {
-    maxHeight: 200,
-  },
-});
+import { StatusBar } from "./components/StatusBar";
 
 export default () => {
   const [user, setUser] = useState<UserDetails | null>();
@@ -80,6 +40,7 @@ export default () => {
           <ApplicationProvider {...eva} theme={eva[themeMode]}>
             <SafeAreaProvider>
               <NavigationContainer>
+                <StatusBar />
                 <RootNavigator isLoggedIn={user != null} />
               </NavigationContainer>
             </SafeAreaProvider>
