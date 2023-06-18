@@ -10,6 +10,9 @@ import {
 import { useState } from "react";
 import { StyleSheet } from "react-native";
 import { Icon } from "../components/Icon";
+import { TourCard } from "../components/TourCard";
+import { Tour } from "../assets/dummy-data";
+import { ScrollView } from "react-native-gesture-handler";
 
 const i18n: I18nConfig = {
   dayNames: {
@@ -77,20 +80,60 @@ export const SavedToursScreen: React.FC = () => {
 
   return (
     <Layout level="2" style={styles.container}>
-      <Card style={styles.dateCard}>
-        <Datepicker
-          date={date}
-          onSelect={(nextDate) => setDate(nextDate)}
-          dateService={localeDateService}
-          label="Datum"
-          accessoryRight={(props) => (
-            <Icon {...props} name="calendar-outline" />
-          )}
-          filter={(d1) =>
-            !!AVAILABLE_DATES.find((d2) => d1.getTime() == d2.getTime())
-          }
-        />
-      </Card>
+      <ScrollView style={styles.container}>
+        <Card style={styles.dateCard}>
+          <Datepicker
+            date={date}
+            onSelect={(nextDate) => setDate(nextDate)}
+            dateService={localeDateService}
+            label="Datum"
+            accessoryRight={(props) => (
+              <Icon {...props} name="calendar-outline" />
+            )}
+            filter={(d1) =>
+              !!AVAILABLE_DATES.find((d2) => d1.getTime() == d2.getTime())
+            }
+          />
+        </Card>
+        {date.getTime() == AVAILABLE_DATES[1].getTime() ? (
+          <>
+            <TourCard
+              name="Rundgang Schiller"
+              rooms={[
+                { name: "Allgemeiner Unterrichtsraum", count: 10 },
+                { name: "Hortraum", count: 5 },
+                { name: "Aula", count: 7 },
+                { name: "Eingangszone", count: 3 },
+              ]}
+              progress={1}
+              rating={0.55}
+            />
+            <TourCard
+              name="Rundgang Lessing"
+              rooms={[
+                { name: "Allgemeiner Unterrichtsraum", count: 17 },
+                { name: "Aula", count: 2 },
+              ]}
+              progress={1}
+              rating={0.55}
+            />
+          </>
+        ) : date.getTime() == AVAILABLE_DATES[2].getTime() ? (
+          <TourCard
+            name="Rundgang Gerda Taro Schule"
+            rooms={[
+              { name: "Allgemeiner Unterrichtsraum", count: 10 },
+              { name: "Hortraum", count: 5 },
+              { name: "Aula", count: 7 },
+              { name: "Eingangszone", count: 3 },
+            ]}
+            progress={1}
+            rating={0.55}
+          />
+        ) : (
+          <></>
+        )}
+      </ScrollView>
     </Layout>
   );
 };
