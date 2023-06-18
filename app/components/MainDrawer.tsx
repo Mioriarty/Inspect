@@ -7,7 +7,7 @@ import {
   Layout,
   Text,
 } from "@ui-kitten/components";
-import { StyleSheet, View, Alert } from "react-native";
+import { StyleSheet, View, Alert, Image } from "react-native";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 import { name as appName, version as appVersion } from "../package.json";
 import { Icon } from "./Icon";
@@ -49,7 +49,10 @@ export const MainDrawer: React.FC<DrawerContentComponentProps> = ({
       ]}
     >
       <View style={styles.titleContiner}>
-        <Text category="h3">Inspect</Text>
+        <Image
+          source={require("../assets/logo_name_row.png")}
+          style={styles.logo}
+        />
       </View>
       <Divider />
       <Drawer selectedIndex={new IndexPath(state.index)} onSelect={onSelect}>
@@ -93,5 +96,9 @@ const styles = StyleSheet.create({
     alignItems: "flex-end",
     paddingVertical: 8,
     paddingHorizontal: 16,
+  },
+  logo: {
+    height: 50,
+    resizeMode: "contain",
   },
 });

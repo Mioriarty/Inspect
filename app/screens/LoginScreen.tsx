@@ -6,6 +6,7 @@ import {
   KeyboardAvoidingView,
   Platform,
   ScrollView,
+  Image,
 } from "react-native";
 import {
   Button,
@@ -57,7 +58,10 @@ export const LoginScreen: React.FC = () => {
             level="2"
             style={[styles.headerContainer, { paddingTop: insets.top + 20 }]}
           >
-            <Text category="h1">Willkommen</Text>
+            <Image
+              source={require("../assets/logo_name_row.png")}
+              style={styles.logo}
+            />
             <Select value="Stadt Leipzig" style={styles.citySelect} disabled>
               <SelectItem>Stadt Leipzig</SelectItem>
             </Select>
@@ -112,9 +116,14 @@ const styles = StyleSheet.create({
     alignItems: "center",
     minHeight: 216,
   },
+  logo: {
+    height: 70,
+    margin: 20,
+    resizeMode: "contain",
+  },
   citySelect: {
     width: 170,
-    marginTop: 16,
+    margin: 16,
   },
   formContainer: {
     flex: 1,
