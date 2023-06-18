@@ -36,6 +36,10 @@ export const MainDrawer: React.FC<DrawerContentComponentProps> = ({
         },
       ]);
     } else {
+      if (index.row == 4) {
+        // About
+        return;
+      }
       navigation.navigate(state.routeNames[index.row]);
     }
   };
@@ -71,6 +75,10 @@ export const MainDrawer: React.FC<DrawerContentComponentProps> = ({
         <DrawerItem
           title="Abmelden"
           accessoryLeft={(props) => <Icon {...props} name="log-out-outline" />}
+        />
+        <DrawerItem
+          title="Über"
+          accessoryLeft={(props) => <Icon {...props} name="info" />}
         />
       </Drawer>
       <Divider />
