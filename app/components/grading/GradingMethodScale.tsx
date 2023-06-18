@@ -37,9 +37,7 @@ export const GradingMethodScale: React.FC<GradingMethodScaleProps> = ({
             category="c1"
             style={{
               color:
-                option.value == value
-                  ? option.color
-                  : theme["text-basic-color"],
+                option.value == value ? option.color : theme["text-hint-color"],
             }}
           >
             {option.text}
