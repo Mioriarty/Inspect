@@ -7,7 +7,15 @@ import {
   Platform,
   ScrollView,
 } from "react-native";
-import { Button, Input, Layout, Text } from "@ui-kitten/components";
+import {
+  Button,
+  Divider,
+  Input,
+  Layout,
+  Select,
+  SelectItem,
+  Text,
+} from "@ui-kitten/components";
 import { Icon } from "../components/Icon";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 import { useUser } from "../contexts/UserContext";
@@ -43,50 +51,54 @@ export const LoginScreen: React.FC = () => {
       behavior={Platform.OS === "ios" ? "padding" : "height"}
       style={styles.container}
     >
-      <ScrollView bounces={false}>
-        <View style={[styles.headerContainer, { paddingTop: insets.top }]}>
-          <Text category="h1" status="control">
-            Willkommen
-          </Text>
-          <Text style={styles.signInLabel} category="s1" status="control">
-            Bitte melden Sie sich mit ihrem Kürzel an.
-          </Text>
-        </View>
-        <Layout style={styles.formContainer} level="1">
-          <Input
-            placeholder="Kürzel"
-            value={acronym}
-            onChangeText={setAcronym}
-            accessoryRight={(props) => (
-              <Icon name="person-outline" {...props} />
-            )}
-          />
-          <Input
-            style={styles.passwordInput}
-            placeholder="Password"
-            value={password}
-            accessoryRight={renderPasswordIcon}
-            secureTextEntry={!passwordVisible}
-            onChangeText={setPassword}
-          />
-          <View style={styles.forgotPasswordContainer}>
+      <Layout level="2" style={styles.container}>
+        <ScrollView bounces={false} style={styles.container}>
+          <Layout
+            level="2"
+            style={[styles.headerContainer, { paddingTop: insets.top + 20 }]}
+          >
+            <Text category="h1">Willkommen</Text>
+            <Select value="Stadt Leipzig" style={styles.citySelect} disabled>
+              <SelectItem>Stadt Leipzig</SelectItem>
+            </Select>
+          </Layout>
+          <Divider />
+          <View style={styles.formContainer}>
+            <Input
+              placeholder="Kürzel"
+              value={acronym}
+              onChangeText={setAcronym}
+              accessoryRight={(props) => (
+                <Icon name="person-outline" {...props} />
+              )}
+            />
+            <Input
+              style={styles.passwordInput}
+              placeholder="Password"
+              value={password}
+              accessoryRight={renderPasswordIcon}
+              secureTextEntry={!passwordVisible}
+              onChangeText={setPassword}
+            />
+            <View style={styles.forgotPasswordContainer}>
+              <Button
+                style={styles.forgotPasswordButton}
+                appearance="ghost"
+                onPress={onForgotPasswordButtonPress}
+              >
+                Sie kennen Ihr Kürzel nicht?
+              </Button>
+            </View>
             <Button
-              style={styles.forgotPasswordButton}
-              status="control"
-              onPress={onForgotPasswordButtonPress}
+              style={styles.signInButton}
+              size="giant"
+              onPress={onSignInButtonPress}
             >
-              Sie kennen Ihr Kürzel nicht?
+              Anmelden
             </Button>
           </View>
-          <Button
-            style={styles.signInButton}
-            size="giant"
-            onPress={onSignInButtonPress}
-          >
-            Anmelden
-          </Button>
-        </Layout>
-      </ScrollView>
+        </ScrollView>
+      </Layout>
     </KeyboardAvoidingView>
   );
 };
@@ -94,13 +106,15 @@ export const LoginScreen: React.FC = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "background-basic-color-1",
   },
   headerContainer: {
     justifyContent: "center",
     alignItems: "center",
-    backgroundColor: "green",
     minHeight: 216,
+  },
+  citySelect: {
+    width: 170,
+    marginTop: 16,
   },
   formContainer: {
     flex: 1,
