@@ -17,17 +17,6 @@ import { ScrollView } from "react-native";
 import { TOURS } from "../assets/dummy-data";
 import { DrawerActions, useNavigation } from "@react-navigation/native";
 
-export const DashboardTopNavigation = () => {
-  const navigation = useNavigation();
-  return (
-    <TopNavigation
-      title="Inspect"
-      backIcon="menu"
-      backAction={() => navigation.dispatch(DrawerActions.openDrawer())}
-    />
-  );
-};
-
 const DUMMY_PR = [
   { progress: 0.6, rating: 0.95 },
   { progress: 1, rating: 0.3 },
