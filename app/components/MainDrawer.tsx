@@ -6,12 +6,14 @@ import {
   IndexPath,
   Layout,
   Text,
+  useTheme,
 } from "@ui-kitten/components";
 import { StyleSheet, View, Alert, Image } from "react-native";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 import { name as appName, version as appVersion } from "../package.json";
 import { Icon } from "./Icon";
 import { useUser } from "../contexts/UserContext";
+import { useThemeMode } from "../contexts/ThemeModeContext";
 
 export const MainDrawer: React.FC<DrawerContentComponentProps> = ({
   navigation,
@@ -19,6 +21,7 @@ export const MainDrawer: React.FC<DrawerContentComponentProps> = ({
 }) => {
   const insets = useSafeAreaInsets();
   const { setUser } = useUser();
+  const { themeMode } = useThemeMode();
 
   const onSelect = (index: IndexPath): void => {
     if (index.row == 3) {
@@ -54,7 +57,11 @@ export const MainDrawer: React.FC<DrawerContentComponentProps> = ({
     >
       <View style={styles.titleContiner}>
         <Image
-          source={require("../assets/logo_name_row.png")}
+          source={
+            themeMode == "light"
+              ? require("../assets/logo_name_row.png")
+              : require("../assets/logo_name_row_white.png")
+          }
           style={styles.logo}
         />
       </View>
