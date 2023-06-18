@@ -21,10 +21,16 @@
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#F8F9FA"
-      }
+      },
+      "package": "com.mioriarty.inspect"
     },
     "web": {
       "favicon": "./assets/favicon.png"
+    },
+    "extra": {
+      "eas": {
+        "projectId": "96ddd8bc-e152-42bd-92b7-0e0ab9b54920"
+      }
     }
   }
 }
