@@ -20,6 +20,7 @@ import {
 import { Icon } from "../components/Icon";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 import { useUser } from "../contexts/UserContext";
+import { useThemeMode } from "../contexts/ThemeModeContext";
 
 export const LoginScreen: React.FC = () => {
   const insets = useSafeAreaInsets();
@@ -27,6 +28,7 @@ export const LoginScreen: React.FC = () => {
   const [password, setPassword] = React.useState<string>();
   const [passwordVisible, setPasswordVisible] = React.useState<boolean>(false);
   const { setUser } = useUser();
+  const { themeMode } = useThemeMode();
 
   const onSignInButtonPress = (): void => {
     setUser("Secret");
@@ -59,7 +61,11 @@ export const LoginScreen: React.FC = () => {
             style={[styles.headerContainer, { paddingTop: insets.top + 20 }]}
           >
             <Image
-              source={require("../assets/logo_name_row.png")}
+              source={
+                themeMode == "light"
+                  ? require("../assets/logo_name_row.png")
+                  : require("../assets/logo_name_row_white.png")
+              }
               style={styles.logo}
             />
             <Select value="Stadt Leipzig" style={styles.citySelect} disabled>
