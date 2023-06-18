@@ -2,10 +2,7 @@ import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import React from "react";
 import { LoginScreen } from "../screens/LoginScreen";
-import {
-  DashboardScreen,
-  DashboardTopNavigation,
-} from "../screens/DashboardScreen";
+import { DashboardScreen } from "../screens/DashboardScreen";
 import { TopNavigation } from "../components/TopNavigation";
 import { TourScreen } from "../screens/TourScreen";
 import { GradingScreen } from "../screens/GradingScreen";
