@@ -5,6 +5,7 @@ import { DashboardScreen } from "../screens/DashboardScreen";
 import { MainDrawer } from "../components/MainDrawer";
 import { DrawerTopNavigation } from "../components/DrawerTopNavigation";
 import { SavedToursScreen } from "../screens/SavedToursScreen";
+import { SettingsScreen } from "../screens/SettingsScreen";
 
 const Drawer = createDrawerNavigator();
 
@@ -23,6 +24,13 @@ export const DrawerNavigator: React.FC = () => {
         component={SavedToursScreen}
         options={{
           header: () => <DrawerTopNavigation title="Gespeicherte Rundgänge" />,
+        }}
+      />
+      <Drawer.Screen
+        name="SettingsScreen"
+        component={SettingsScreen}
+        options={{
+          header: () => <DrawerTopNavigation title="Einstellungen" />,
         }}
       />
     </Drawer.Navigator>

@@ -23,6 +23,10 @@ import { UserContext, UserDetails } from "./contexts/UserContext";
 import { NavigationContainer } from "@react-navigation/native";
 import { RootNavigator } from "./navigators/RootNavigator";
 import { SafeAreaProvider } from "react-native-safe-area-context";
+import {
+  ThemeModeContext,
+  ThemeModeContextType,
+} from "./contexts/ThemeModeContext";
 
 const data = new Array(30).fill({
   title: "Item",
@@ -66,19 +70,22 @@ const styles = StyleSheet.create({
 
 export default () => {
   const [user, setUser] = useState<UserDetails | null>();
+  const [themeMode, setThemeMode] = useState<string>("light");
 
   return (
     <>
       <IconRegistry icons={EvaIconsPack} />
-      <ApplicationProvider {...eva} theme={eva.light}>
-        <UserContext.Provider value={{ user, setUser }}>
-          <SafeAreaProvider>
-            <NavigationContainer>
-              <RootNavigator isLoggedIn={user != null} />
-            </NavigationContainer>
-          </SafeAreaProvider>
-        </UserContext.Provider>
-      </ApplicationProvider>
+      <UserContext.Provider value={{ user, setUser }}>
+        <ThemeModeContext.Provider value={{ themeMode, setThemeMode }}>
+          <ApplicationProvider {...eva} theme={eva[themeMode]}>
+            <SafeAreaProvider>
+              <NavigationContainer>
+                <RootNavigator isLoggedIn={user != null} />
+              </NavigationContainer>
+            </SafeAreaProvider>
+          </ApplicationProvider>
+        </ThemeModeContext.Provider>
+      </UserContext.Provider>
     </>
   );
 };
